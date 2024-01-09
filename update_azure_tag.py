@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from azure_resource_graph_query import run_azure_rg_query
 
 
-def update_azure_tag(tag_key: str, tag_value: str, resource_group_names: str):
+def update_azure_tag(tag_key: str, tag_value: str, resource_group_names: str, subscription_id: str):
     """
     update a specific tag with a value using python sdk
 
@@ -18,7 +18,8 @@ def update_azure_tag(tag_key: str, tag_value: str, resource_group_names: str):
     """
     load_dotenv()
     credential = DefaultAzureCredential()
-    subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
+
+    subscription_id = os.environ["subscription_id"]
     resource_client = ResourceManagementClient(credential, subscription_id)
     # create an empty tags dictionary
     tags = {}
@@ -63,9 +64,9 @@ def main():
     resource_group_names = args.resource_group_names
 
     logging.info("Proccess started......")
-    subscription_id = run_azure_rg_query(subscription_name= subscription_name)
+    subscription_id = run_azure_rg_query(subscription_name=subscription_name)
     os.environ['subscription_id'] = subscription_id
-    update_azure_tag(tag_key= tag_key,tag_value=tag_value,resource_group_names= resource_group_names)
+    update_azure_tag(tag_key= tag_key,tag_value=tag_value,resource_group_names= resource_group_names, subscription_id=subscription_id)
     logging.info("Process completed.")
 
 
