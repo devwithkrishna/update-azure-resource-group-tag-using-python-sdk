@@ -19,7 +19,7 @@ on:
         required: true
         type: string
         description: "names of resource groups. more than one can be provided as comma seperated values"
-run-name: ${{ inputs.actor }} changing tags of ${{ inputs.resource_group_names }} on ${{inputs.subscription_name }}
+run-name: ${{ github.actor }} changing tags of ${{ inputs.resource_group_names }} on ${{inputs.subscription_name }}
 jobs:
   azure-tag-updation-using-python-github-workflow:
     runs-on: ubuntu-latest
