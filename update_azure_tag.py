@@ -5,6 +5,7 @@ from azure.identity import DefaultAzureCredential
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.resource.resources.models import TagsPatchResource
 from dotenv import load_dotenv
+from azure_resource_graph_query import run_azure_rg_query
 
 
 def update_azure_tag(tag_key: str, tag_value: str, resource_group_names: str):
@@ -52,15 +53,18 @@ def main():
     parser = argparse.ArgumentParser("Tag updation automation in Azure using python")
     parser.add_argument("--tag_value", help= "tag value corresponding to the key in azure", required=True, type=str)
     parser.add_argument("--tag_key", help= "tag keys in azure", required=True, type=str)
+    parser.add_argument("--subscription_name", help="subscription name in azure", required=True, type=str)
     parser.add_argument("--resource_group_names", help= "names of resource groups. more than one can be provided as comma seperated values", required=True, type=str)
 
     args = parser.parse_args()
     tag_key = args.tag_key
     tag_value = args.tag_value
+    subscription_name = args.subscription_name
     resource_group_names = args.resource_group_names
 
     logging.info("Proccess started......")
-
+    subscription_id = run_azure_rg_query(subscription_name= subscription_name)
+    os.environ['subscription_id'] = subscription_id
     update_azure_tag(tag_key= tag_key,tag_value=tag_value,resource_group_names= resource_group_names)
     logging.info("Process completed.")
 

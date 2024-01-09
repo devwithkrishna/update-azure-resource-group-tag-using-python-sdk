@@ -1,0 +1,79 @@
+name: azure-tag-updation-using-python-github-workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_key:
+        required: true
+        type: string
+        description: "Corresponding tag key"
+      tag_value:
+        required: true
+        type: string
+        description: "Corresponding tag value for the key"
+      subscription_name:
+        required: true
+        type: string
+        description: "The azure subscription name."
+      resource_group_names:
+        required: true
+        type: string
+        description: "names of resource groups. more than one can be provided as comma seperated values"
+run-name: ${{ inputs.actor }} changing tags of ${{ inputs.resource_group_names }} on ${{inputs.subscription_name }}
+jobs:
+  azure-tag-updation-using-python-github-workflow:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: package installations
+        run: |
+          pip install pipenv
+          pipenv install
+      - name: run python program
+        run: |
+          pipenv run python3 update_azure_tag.py --tag_key ${{ inputs.tag_key }} \
+          --tag_value ${{ inputs.tag_value }} \
+          --subscription_name ${{ inputs.subscription_name }} \
+          --resource_group_names ${{ inputs.resource_group_names }}
+      - name: program execution completed
+        run: echo "program execution completed"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
