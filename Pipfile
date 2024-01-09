@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+azure-identity = "=1.15.0"
+azure-keyvault-secrets = "=4.7.0"
+argparse = "=1.4.0"
+python-dotenv = "=1.0.0"
+azure-mgmt-resource = "=23.0.1"
+
+
+[requires]
+python_version = "3"
