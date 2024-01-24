@@ -7,7 +7,7 @@ name = "pypi"
 azure-identity = "=1.15.0"
 azure-keyvault-secrets = "=4.7.0"
 argparse = "=1.4.0"
-python-dotenv = "=1.0.0"
+python-dotenv = "=1.0.1"
 azure-mgmt-resource = "=23.0.1"
 azure-mgmt-resourcegraph = "=8.0.0"
 
