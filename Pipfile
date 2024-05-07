@@ -8,7 +8,7 @@ azure-identity = "=1.16.0"
 azure-keyvault-secrets = "=4.8.0"
 argparse = "=1.4.0"
 python-dotenv = "=1.0.1"
-azure-mgmt-resource = "=23.0.1"
+azure-mgmt-resource = "=23.1.0"
 azure-mgmt-resourcegraph = "=8.0.0"
 
 
